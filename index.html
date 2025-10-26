@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>rubydev.shop — Ruby on Rails Development</title>
+  <meta name="description" content="rubydev.shop is a seasoned Ruby & Rails development shop. We design, build, modernize, and scale secure web software." />
+  <style>
+    :root{
+      --ruby: #9B111E;           /* Ruby red */
+      --ruby-600:#7F0E19;        /* Darker ruby for hovers */
+      --ruby-700:#5F0B15;        /* Even darker */
+      --offwhite:#FFFAF5;        /* Off-white background */
+      --ink:#2E2A28;             /* Primary text */
+      --muted:#6C5F58;           /* Muted text */
+      --line:#E7D9D1;            /* Subtle lines */
+      --card:#FFF6F0;            /* Very light warm card */
+      --radius:22px;
+      --shadow:0 12px 30px rgba(155,17,30,.08), 0 2px 6px rgba(155,17,30,.05);
+      --shadow-sm:0 6px 16px rgba(155,17,30,.07), 0 1px 3px rgba(155,17,30,.04);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--offwhite);color:var(--ink);font:16px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji"}
+    .container{max-width:1120px;margin-inline:auto;padding:0 1.25rem}
+    a{color:var(--ruby);text-decoration:none}
+    a:hover{color:var(--ruby-600)}
+    .skip{position:absolute;left:-9999px}
+    .skip:focus{left:1rem;top:1rem;background:#fff;border:2px solid var(--ruby);padding:.5rem 1rem;border-radius:12px;z-index:999}
+
+    /* Header */
+    header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(140%) blur(6px);background:linear-gradient(0deg, rgba(255,250,245,.8), rgba(255,250,245,.8));border-bottom:1px solid var(--line)}
+    .nav{display:flex;align-items:center;gap:1rem;justify-content:space-between;padding:.75rem 0}
+    .brand{display:flex;align-items:center;gap:.75rem;font-weight:800;letter-spacing:.3px}
+    .brand-mark{width:28px;height:28px;border-radius:9px;background:radial-gradient(120% 120% at 20% 20%, #C0192E 0%, #9B111E 45%, #7F0E19 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.25), 0 2px 8px rgba(155,17,30,.25)}
+    nav ul{display:flex;align-items:center;gap:1rem;margin:0;padding:0;list-style:none}
+    nav a{padding:.5rem .75rem;border-radius:12px}
+    nav a:hover{background:rgba(155,17,30,.08)}
+
+    /* Hero */
+    .hero{position:relative;padding:5.5rem 0 3.5rem;overflow:hidden}
+    .hero::before{content:"";position:absolute;inset:-40% -10% auto -10%;height:140%;background:radial-gradient(70% 50% at 10% 10%, rgba(155,17,30,.08) 0%, rgba(155,17,30,0) 70%), radial-gradient(60% 60% at 90% 10%, rgba(155,17,30,.06) 0%, rgba(155,17,30,0) 60%);pointer-events:none}
+    .eyebrow{display:inline-block;background:rgba(155,17,30,.08);color:var(--ruby);padding:.25rem .6rem;border-radius:999px;font-weight:600;border:1px solid rgba(155,17,30,.2)}
+    h1{font-size:clamp(2rem, 3.3vw + 1rem, 3.2rem);line-height:1.1;margin:.9rem 0 .5rem;letter-spacing:.2px}
+    .lead{font-size:clamp(1rem, .5vw + .9rem, 1.125rem);color:var(--muted);max-width:65ch}
+    .cta{display:flex;gap:.75rem;margin-top:1.25rem;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.8rem 1rem;border-radius:14px;font-weight:700;border:1px solid var(--line);box-shadow:var(--shadow-sm);transition:transform .06s ease, box-shadow .2s ease}
+    .btn:active{transform:translateY(1px)}
+    .btn-primary{background:var(--ruby);color:#fff;border-color:transparent}
+    .btn-primary:hover{background:var(--ruby-600);box-shadow:var(--shadow)}
+    .btn-ghost{background:#fff;color:var(--ruby)}
+
+    /* Sections */
+    section{padding:2.75rem 0}
+    h2{font-size:clamp(1.4rem, .9vw + 1rem, 2rem);line-height:1.2;margin:0 0 1rem;color:var(--ruby)}
+    .subtitle{color:var(--muted);margin-bottom:1.5rem}
+
+    /* Cards & grids */
+    .grid{display:grid;gap:1rem}
+    .grid-3{grid-template-columns:repeat(3, minmax(0,1fr))}
+    .grid-2{grid-template-columns:repeat(2, minmax(0,1fr))}
+    @media (max-width: 960px){ .grid-3{grid-template-columns:1fr 1fr} }
+    @media (max-width: 640px){ .grid-3, .grid-2{grid-template-columns:1fr} }
+
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.1rem;box-shadow:var(--shadow-sm)}
+    .card h3{margin:.25rem 0 .25rem;font-size:1.05rem}
+    .kicker{color:var(--muted);font-size:.95rem}
+
+    /* Feature list bullets */
+    .list{margin:.5rem 0 0;padding:0;list-style:none;display:grid;gap:.5rem}
+    .list li{display:grid;grid-template-columns:24px 1fr;gap:.6rem;align-items:start}
+    .dot{width:22px;height:22px;border-radius:999px;background:linear-gradient(175deg, #C0192E 0%, var(--ruby) 60%, var(--ruby-700) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.35), 0 2px 6px rgba(155,17,30,.3)}
+
+    /* Accent rows */
+    .accent{background:linear-gradient(180deg, rgba(155,17,30,.06), rgba(155,17,30,.03));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+
+    /* Footer */
+    footer{padding:2rem 0;border-top:1px solid var(--line);color:var(--muted)}
+
+    .tiny{font-size:.92rem;color:var(--muted)}
+    .badge{display:inline-block;border:1px solid var(--line);padding:.2rem .5rem;border-radius:999px;color:var(--muted);background:#fff}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <span>rubydev.shop</span>
+      </div>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#engagement">Engagement</a></li>
+          <li><a href="#deliverables">Deliverables</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">Ruby & Rails experts</span>
+        <h1>We design, build, modernize, and scale robust Rails apps.</h1>
+        <p class="lead">From product discovery to zero‑downtime deploys, our seasoned team ships secure, fast, and maintainable software. We favor pragmatic patterns, strong tests, and observability from day one.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#contact" aria-label="Jump to contact form">Start a conversation</a>
+          <a class="btn btn-ghost" href="#services">Explore services</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <h2>Core services</h2>
+        <p class="subtitle">Everything you need to move from idea to reliable production—without ceremony.</p>
+
+        <div class="grid grid-3">
+          <article class="card">
+            <span class="kicker">Product & architecture</span>
+            <h3>Discovery & systems design</h3>
+            <ul class="list">
+              <li><span class="dot" aria-hidden="true"></span><span>Stakeholder interviews, user stories, lean roadmaps.</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span>Service boundaries, multi‑tenant SaaS, event‑driven patterns.</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span>12‑factor apps and clear operational runbooks.</span></li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="kicker">Rails application development</span>
+            <h3>Greenfield & feature delivery</h3>
+            <ul class="list">
+              <li><span class="dot" aria-hidden="true"></span><span>Turbo/Hotwire, Stimulus, Tailwind‑first UIs; React/Vue where it fits.</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span>REST & GraphQL APIs, OAuth/JWT, versioning & rate limiting.</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span>Real‑time features via ActionCable/WebSockets & SSE.</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span>Integrations: Stripe, PayPal, Shopify, Twilio, SendGrid, AWS, and more.</span></li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="kicker">Modernization & upgrades</span>
+            <h3>Upgrades & rescue missions</h3>
+            <ul class="list">
+              <li><span class="dot" aria-hidden="true"></span><span>Ruby/Rails upgrades—including major jumps & gem remediation.</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span>Stabilization sprints, tech‑debt reduction, sensible guardrails.</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span>Monolith → modular: extract engines/services when it adds value.</span></li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="kicker">Performance & scalability</span>
+            <h3>Make it fast—and keep it fast</h3>
+            <ul class="list">
+              <li><span class="dot" aria-hidden="true"></span><span>Postgres tuning, query plans, indexing strategy & partitioning.</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span>Redis caching (fragment/Russian‑doll), HTTP caching & CDN strategy.</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span>Load testing, queuing/back‑pressure, autoscaling.</span></li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="kicker">Security & compliance</span>
+            <h3>Secure by default</h3>
+            <ul class="list">
+              <li><span class="dot" aria-hidden="true"></span><span>OWASP best practices: CSRF/XSS protections, secrets hygiene.</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span>Dependency & supply‑chain audits, access‑control reviews.</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span>GDPR/CCPA support: PII flows, logging, retention & right‑to‑erasure.</span></li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="kicker">Quality engineering</span>
+            <h3>Confidence to ship</h3>
+            <ul class="list">
+              <li><span class="dot" aria-hidden="true"></span><span>RSpec/Minitest, Capybara system tests, factories & API contract tests.</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span>CI/CD with GitHub Actions/CircleCI, zero‑downtime deploys.</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span>Observability: structured logs, metrics, tracing & alerting.</span></li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="kicker">Data & background processing</span>
+            <h3>Jobs & analytics</h3>
+            <ul class="list">
+              <li><span class="dot" aria-hidden="true"></span><span>Sidekiq & ActiveJob with retries, idempotency & scheduling.</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span>File & media pipelines (Active Storage) with durable storage.</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span>Event collection, cohort tracking & BI integrations.</span></li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="kicker">DevOps & hosting</span>
+            <h3>From Heroku to AWS</h3>
+            <ul class="list">
+              <li><span class="dot" aria-hidden="true"></span><span>Heroku, Fly.io, AWS (ECS/EKS), Dockerized Rails.</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span>Infrastructure‑as‑code, backups & restore drills.</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span>Runbooks & incident response you can rely on.</span></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="engagement" class="accent">
+      <div class="container">
+        <h2>Engagement models</h2>
+        <p class="subtitle">Flexible ways to plug us in—pick the lane that fits your stage.</p>
+        <div class="grid grid-2">
+          <article class="card">
+            <h3>Fixed‑scope delivery</h3>
+            <p>Clear, well‑defined projects delivered to a schedule and budget. Great for MVPs and discrete feature sets.</p>
+            <span class="badge">Includes roadmap & release plan</span>
+          </article>
+          <article class="card">
+            <h3>Team augmentation</h3>
+            <p>Experienced Rails engineers embedded with your team. We bring standards, velocity, and calm.</p>
+            <span class="badge">Flexible capacity</span>
+          </article>
+          <article class="card">
+            <h3>Fractional CTO / architecture</h3>
+            <p>Hands‑on leadership for product strategy, technical direction, and critical decision support.</p>
+            <span class="badge">Executive‑level guidance</span>
+          </article>
+          <article class="card">
+            <h3>Maintenance retainers</h3>
+            <p>Keep your app healthy with SLAs, updates, and continuous improvements—without hiring.</p>
+            <span class="badge">SLA options</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="deliverables">
+      <div class="container">
+        <h2>Typical deliverables</h2>
+        <div class="grid grid-2">
+          <article class="card">
+            <ul class="list">
+              <li><span class="dot" aria-hidden="true"></span><span>Architecture brief & risk register</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span>Groomed backlog & release plan</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span>CI/CD pipeline & quality gates</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span>Runbooks & developer onboarding docs</span></li>
+            </ul>
+          </article>
+          <article class="card">
+            <p class="tiny">We value clarity and maintainability. Expect explicit trade‑offs and documentation you can hand to a new hire without a call.</p>
+            <p class="tiny">Tooling we like: RSpec, RuboCop/Standard, Brakeman, Sidekiq, Postgres, Redis, GitHub Actions, Fly.io, AWS, Hotwire.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="accent">
+      <div class="container">
+        <h2>Let’s talk</h2>
+        <p class="subtitle">Tell us about your product and timeline. We’ll propose a lean path to first value.</p>
+        <div class="grid grid-2">
+          <article class="card">
+            <h3>Get in touch</h3>
+            <p>Email works best. Include a short brief if you have one.</p>
+            <p><a class="btn btn-primary" href="mailto:hello@rubydev.shop">hello@rubydev.shop</a></p>
+          </article>
+          <article class="card">
+            <h3>What to expect</h3>
+            <ul class="list">
+              <li><span class="dot" aria-hidden="true"></span><span>Quick intro call to align on goals</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span>Lean proposal with scope, risks & milestones</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span>Kickoff within days, not weeks</span></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+      <div>© <span id="y"></span> rubydev.shop</div>
+      <div class="tiny">Ruby on Rails development • Security‑minded • Performance‑obsessed</div>
+    </div>
+  </footer>
+
+  <script>
+    // Update copyright year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
