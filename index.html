@@ -7,78 +7,81 @@
   <meta name="description" content="rubydev.shop is a seasoned Ruby & Rails development shop. We design, build, modernize, and scale secure web software." />
   <style>
     :root{
-      --ruby: #9B111E;           /* Ruby red */
-      --ruby-600:#7F0E19;        /* Darker ruby for hovers */
-      --ruby-700:#5F0B15;        /* Even darker */
-      --offwhite:#FFFAF5;        /* Off-white background */
-      --ink:#2E2A28;             /* Primary text */
-      --muted:#6C5F58;           /* Muted text */
-      --line:#E7D9D1;            /* Subtle lines */
-      --card:#FFF6F0;            /* Very light warm card */
-      --radius:22px;
-      --shadow:0 12px 30px rgba(155,17,30,.08), 0 2px 6px rgba(155,17,30,.05);
-      --shadow-sm:0 6px 16px rgba(155,17,30,.07), 0 1px 3px rgba(155,17,30,.04);
+      --ruby:#A10E2A;          /* Ruby red */
+      --ruby-600:#850C23;      /* Hover */
+      --offwhite:#FFF8F3;      /* Page background */
+      --ink:#161313;           /* High-contrast body text */
+      --muted:#6B5E57;         /* Secondary text */
+      --line:#E9DAD3;          /* Hairline borders */
+      --radius:16px;
+      --shadow-sm:0 8px 20px rgba(0,0,0,.06);
     }
+
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{margin:0;background:var(--offwhite);color:var(--ink);font:16px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji"}
-    .container{max-width:1120px;margin-inline:auto;padding:0 1.25rem}
+    body{
+      margin:0;
+      background:var(--offwhite);
+      color:var(--ink);
+      font:17px/1.7 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    .container{max-width:1160px;margin-inline:auto;padding:0 1.25rem}
     a{color:var(--ruby);text-decoration:none}
-    a:hover{color:var(--ruby-600)}
-    .skip{position:absolute;left:-9999px}
-    .skip:focus{left:1rem;top:1rem;background:#fff;border:2px solid var(--ruby);padding:.5rem 1rem;border-radius:12px;z-index:999}
+    a:hover{text-decoration:underline}
 
     /* Header */
-    header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(140%) blur(6px);background:linear-gradient(0deg, rgba(255,250,245,.8), rgba(255,250,245,.8));border-bottom:1px solid var(--line)}
-    .nav{display:flex;align-items:center;gap:1rem;justify-content:space-between;padding:.75rem 0}
-    .brand{display:flex;align-items:center;gap:.75rem;font-weight:800;letter-spacing:.3px}
-    .brand-mark{width:28px;height:28px;border-radius:9px;background:radial-gradient(120% 120% at 20% 20%, #C0192E 0%, #9B111E 45%, #7F0E19 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.25), 0 2px 8px rgba(155,17,30,.25)}
-    nav ul{display:flex;align-items:center;gap:1rem;margin:0;padding:0;list-style:none}
-    nav a{padding:.5rem .75rem;border-radius:12px}
-    nav a:hover{background:rgba(155,17,30,.08)}
+    header{position:sticky;top:0;z-index:50;background:var(--offwhite);border-bottom:1px solid var(--line)}
+    .nav{display:flex;align-items:center;gap:1rem;justify-content:space-between;padding:.9rem 0}
+    .brand{display:flex;align-items:center;gap:.75rem;font-weight:800;letter-spacing:.2px}
+    .brand-mark{width:26px;height:26px;border-radius:8px;background:var(--ruby)}
+    nav ul{display:flex;align-items:center;gap:.25rem;margin:0;padding:0;list-style:none}
+    nav a{padding:.5rem .7rem;border-radius:10px}
+    nav a:hover{background:rgba(161,14,42,.06);text-decoration:none}
 
     /* Hero */
-    .hero{position:relative;padding:5.5rem 0 3.5rem;overflow:hidden}
-    .hero::before{content:"";position:absolute;inset:-40% -10% auto -10%;height:140%;background:radial-gradient(70% 50% at 10% 10%, rgba(155,17,30,.08) 0%, rgba(155,17,30,0) 70%), radial-gradient(60% 60% at 90% 10%, rgba(155,17,30,.06) 0%, rgba(155,17,30,0) 60%);pointer-events:none}
-    .eyebrow{display:inline-block;background:rgba(155,17,30,.08);color:var(--ruby);padding:.25rem .6rem;border-radius:999px;font-weight:600;border:1px solid rgba(155,17,30,.2)}
-    h1{font-size:clamp(2rem, 3.3vw + 1rem, 3.2rem);line-height:1.1;margin:.9rem 0 .5rem;letter-spacing:.2px}
-    .lead{font-size:clamp(1rem, .5vw + .9rem, 1.125rem);color:var(--muted);max-width:65ch}
-    .cta{display:flex;gap:.75rem;margin-top:1.25rem;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.8rem 1rem;border-radius:14px;font-weight:700;border:1px solid var(--line);box-shadow:var(--shadow-sm);transition:transform .06s ease, box-shadow .2s ease}
+    .hero{padding:7rem 0 4rem}
+    .eyebrow{display:inline-block;color:var(--ruby);padding:.2rem .55rem;border:1px solid var(--ruby);border-radius:999px;font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase}
+    h1{font-size:clamp(2.2rem, 3.4vw + 1rem, 3.8rem);line-height:1.05;margin:1rem 0 .75rem;letter-spacing:-.01em}
+    .lead{font-size:clamp(1.05rem, .5vw + .9rem, 1.2rem);color:var(--muted);max-width:62ch}
+    .cta{display:flex;gap:.8rem;margin-top:1.4rem;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:.55rem;padding:.9rem 1.05rem;border-radius:12px;font-weight:800;border:1px solid var(--line);transition:transform .08s ease, box-shadow .18s ease, background .18s ease}
     .btn:active{transform:translateY(1px)}
-    .btn-primary{background:var(--ruby);color:#fff;border-color:transparent}
-    .btn-primary:hover{background:var(--ruby-600);box-shadow:var(--shadow)}
-    .btn-ghost{background:#fff;color:var(--ruby)}
+    .btn-primary{background:var(--ruby);color:#fff;border-color:var(--ruby)}
+    .btn-primary:hover{background:var(--ruby-600);box-shadow:var(--shadow-sm)}
+    .btn-ghost{background:transparent;color:var(--ruby);border-color:var(--ruby)}
 
     /* Sections */
-    section{padding:2.75rem 0}
-    h2{font-size:clamp(1.4rem, .9vw + 1rem, 2rem);line-height:1.2;margin:0 0 1rem;color:var(--ruby)}
-    .subtitle{color:var(--muted);margin-bottom:1.5rem}
+    section{padding:3.25rem 0}
+    h2{font-size:clamp(1.5rem, 1vw + 1rem, 2.15rem);line-height:1.2;margin:0 0 1rem;color:var(--ink)}
+    .subtitle{color:var(--muted);margin-bottom:1.75rem}
 
-    /* Cards & grids */
-    .grid{display:grid;gap:1rem}
+    /* Grid */
+    .grid{display:grid;gap:1.25rem}
     .grid-3{grid-template-columns:repeat(3, minmax(0,1fr))}
     .grid-2{grid-template-columns:repeat(2, minmax(0,1fr))}
-    @media (max-width: 960px){ .grid-3{grid-template-columns:1fr 1fr} }
+    @media (max-width: 980px){ .grid-3{grid-template-columns:1fr 1fr} }
     @media (max-width: 640px){ .grid-3, .grid-2{grid-template-columns:1fr} }
 
-    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.1rem;box-shadow:var(--shadow-sm)}
-    .card h3{margin:.25rem 0 .25rem;font-size:1.05rem}
-    .kicker{color:var(--muted);font-size:.95rem}
+    /* Cards */
+    .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;transition:transform .12s ease, border-color .2s ease, box-shadow .2s ease}
+    .card:hover{transform:translateY(-2px);border-color:var(--ruby);box-shadow:var(--shadow-sm)}
+    .card h3{margin:.35rem 0 .25rem;font-size:1.1rem}
+    .kicker{color:var(--ruby);font-weight:700;font-size:.9rem}
 
-    /* Feature list bullets */
-    .list{margin:.5rem 0 0;padding:0;list-style:none;display:grid;gap:.5rem}
-    .list li{display:grid;grid-template-columns:24px 1fr;gap:.6rem;align-items:start}
-    .dot{width:22px;height:22px;border-radius:999px;background:linear-gradient(175deg, #C0192E 0%, var(--ruby) 60%, var(--ruby-700) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.35), 0 2px 6px rgba(155,17,30,.3)}
+    /* Minimal list bullets */
+    .list{margin:.6rem 0 0;padding:0;list-style:none;display:grid;gap:.55rem}
+    .list li{display:grid;grid-template-columns:14px 1fr;gap:.6rem;align-items:start}
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--ruby);margin-top:.55rem}
 
     /* Accent rows */
-    .accent{background:linear-gradient(180deg, rgba(155,17,30,.06), rgba(155,17,30,.03));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .accent{background:none;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 
     /* Footer */
-    footer{padding:2rem 0;border-top:1px solid var(--line);color:var(--muted)}
-
-    .tiny{font-size:.92rem;color:var(--muted)}
-    .badge{display:inline-block;border:1px solid var(--line);padding:.2rem .5rem;border-radius:999px;color:var(--muted);background:#fff}
+    footer{padding:2.2rem 0;border-top:1px solid var(--line);color:var(--muted)}
+    .tiny{font-size:.95rem;color:var(--muted)}
+    .badge{display:inline-block;border:1px solid var(--line);padding:.2rem .55rem;border-radius:999px;color:var(--muted);background:#fff}
   </style>
 </head>
 <body>
@@ -105,8 +108,8 @@
     <section class="hero">
       <div class="container">
         <span class="eyebrow">Ruby & Rails experts</span>
-        <h1>We design, build, modernize, and scale robust Rails apps.</h1>
-        <p class="lead">From product discovery to zero‑downtime deploys, our seasoned team ships secure, fast, and maintainable software. We favor pragmatic patterns, strong tests, and observability from day one.</p>
+        <h1>Bold, modern Rails apps—delivered.</h1>
+        <p class="lead">Seasoned Ruby & Rails engineers shipping secure, fast, maintainable software. Clean architecture, strong tests, simple ops.</p>
         <div class="cta">
           <a class="btn btn-primary" href="#contact" aria-label="Jump to contact form">Start a conversation</a>
           <a class="btn btn-ghost" href="#services">Explore services</a>
